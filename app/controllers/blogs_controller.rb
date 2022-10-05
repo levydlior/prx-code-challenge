@@ -35,7 +35,7 @@ class BlogsController < ApplicationController
         return word_object
     end
 
-    #action - sends back the array of blog content and the object of word counts
+    #action - we get back an array with different blog posts and an object with word count
     def index 
       response = RestClient.get("https://www.internate.org/wp-json/wp/v2/posts?_fields[]=content&per_page=3")
       parsed_response = JSON.parse(response)
