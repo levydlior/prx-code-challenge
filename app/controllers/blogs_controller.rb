@@ -34,18 +34,15 @@ class BlogsController < ApplicationController
         end
         return returned_array
     end
-
- 
-    # https://www.internate.org/wp-json/wp/v2/posts?_fields[]=content&per_page=3
+    
     #action - we get back an array with different blog posts and an object with word count
     def index 
+      
       response = RestClient.get("https://www.internate.org/wp-json/wp/v2/posts?per_page=3")
       parsed_response = JSON.parse(response)
-
         final_array = []
         final_array.push(split_content_into_specific_elements(parsed_response))
         render json: final_array , status: :ok
-
+puts 'done'
     end
-
 end
