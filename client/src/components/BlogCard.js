@@ -1,17 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 
-const BlogCardDiv = styled.div`
-border: solid 1px;
-margin: 0.5rem;
-padding: 0.5rem;
-`
 
 const TitleOne = styled.h2`
 padding 1rem;
@@ -24,8 +15,9 @@ padding 1rem;
 
 const Ul = styled.ul`
 display: flex;
-justify-content: space-between;
+justify-content: start;
 flex-wrap: wrap;
+flex-flow: flow;
 list-style-type: none;
 padding: 1rem;
 `
