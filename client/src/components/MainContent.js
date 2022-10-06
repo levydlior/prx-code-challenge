@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { ActionCableConsumer } from "react-actioncable-provider";
+import styled from 'styled-components'
+import BlogCard from "./BlogCard";
+
+const MainDiv = styled.div`
+display: flex;
+flex-direction: column;
+// text-align: center;
+padding: 5rem;
+`
+
+
 
 function MainContent() {
   const [blogs, setBlogs] = useState([[]]);
@@ -12,26 +23,7 @@ function MainContent() {
 
   console.log(blogs);
 
-  const mapsArray = blogs[0].map((blog) => {
-    function wordCountList() {
-      return Object.entries(blog.word_count).map(([key, value], i) => {
-        return (
-          <li key={key}>
-            {key}: {value}
-          </li>
-        );
-      });
-    }
-
-    return (
-      <div key={blog.title}>
-        <h2>{blog.title}</h2>
-        <p>{blog.content}</p>
-        <h3>Word Count:</h3>
-        <ul>{wordCountList()}</ul>
-      </div>
-    );
-  });
+  const mapsArray = blogs[0].map((blog) => <BlogCard blog={blog} />)
 
   function handleReceived(newBlogs) {
     console.log(newBlogs);
@@ -39,13 +31,13 @@ function MainContent() {
   }
 
   return (
-    <div >
+    <MainDiv>
       <ActionCableConsumer
         channel={{ channel: "BlogsChannel" }}
         onReceived={handleReceived}
       />
       {mapsArray}
-    </div>
+    </MainDiv>
   );
 }
 
