@@ -42,7 +42,10 @@ class BlogsController < ApplicationController
       parsed_response = JSON.parse(response)
         final_array = []
         final_array.push(split_content_into_specific_elements(parsed_response))
+        ActionCable.server.broadcast 'blogs_channel', final_array
         render json: final_array , status: :ok
 puts 'done'
     end
+
+
 end
