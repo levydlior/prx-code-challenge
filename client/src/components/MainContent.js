@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { ActionCableConsumer } from "react-actioncable-provider";
-import styled from 'styled-components'
+import styled from "styled-components";
 import BlogCard from "./BlogCard";
 
 const MainDiv = styled.div`
-display: flex;
-flex-direction: column;
-// text-align: center;
-padding: 5rem;
-`
-
-
+  display: flex;
+  flex-direction: column;
+  // text-align: center;
+  padding: 5rem;
+`;
 
 function MainContent() {
   const [blogs, setBlogs] = useState([[]]);
@@ -21,12 +19,9 @@ function MainContent() {
       .then((parsedBlogsArray) => setBlogs(parsedBlogsArray));
   }, []);
 
-  console.log(blogs);
-
-  const mapsArray = blogs[0].map((blog) => <BlogCard blog={blog} />)
+  const mapsArray = blogs[0].map((blog) => <BlogCard blog={blog} />);
 
   function handleReceived(newBlogs) {
-    console.log(newBlogs);
     setBlogs(newBlogs);
   }
 
