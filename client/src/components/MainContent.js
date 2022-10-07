@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ActionCableConsumer } from "react-actioncable-provider";
 import styled from "styled-components";
 import BlogCard from "./BlogCard";
@@ -12,12 +12,6 @@ const MainDiv = styled.div`
 
 function MainContent() {
   const [blogs, setBlogs] = useState([[]]);
-
-  useEffect(() => {
-    fetch("/blogs")
-      .then((r) => r.json())
-      .then((parsedBlogsArray) => setBlogs(parsedBlogsArray));
-  }, []);
 
   const mapsArray = blogs[0].map((blog) => <BlogCard blog={blog} />);
 
