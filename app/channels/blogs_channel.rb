@@ -1,7 +1,7 @@
 class BlogsChannel < ApplicationCable::Channel
   require 'loofah'
 
-    #function to temove html tags from a string
+    #method to temove html tags from a string
     def remove_html_tags(raw_html)
       parser = Loofah.fragment(raw_html).scrub!(:prune)
       parser.text.gsub("\n", "")
@@ -20,7 +20,6 @@ class BlogsChannel < ApplicationCable::Channel
         return word_count_hash
     end
   
-    #function to return an array with of objects of different blog post content, title and object with word count
     def split_content (array)
           returned_array = []
           array.each do |obj|
@@ -33,15 +32,15 @@ class BlogsChannel < ApplicationCable::Channel
           return returned_array
     end
 
-      def send_data_to_frontend
+    #when tried to get acess to more blogs I got an error - I was only able to get 3 blogs
+      def process_data_and_send_to_front
         stream_from 'blogs_channel'
         response = RestClient.get("https://www.internate.org/wp-json/wp/v2/posts?per_page=3")
           parsed_response = JSON.parse(response)
           final_array = []
           final_array.push(split_content(parsed_response))
 
-            ActionCable.server.broadcast 'blogs_channel', final_array         
-            puts 'done' 
+          ActionCable.server.broadcast 'blogs_channel', final_array         
       end
 
       def interval seconds
@@ -54,14 +53,14 @@ class BlogsChannel < ApplicationCable::Channel
   def subscribed
     stream_from 'blogs_channel'
     interval 10 do
-      send_data_to_frontend
+      process_data_and_send_to_front
     end
    
   end
 
   def unsubscribed
-    
   end
+
 end
 
 
