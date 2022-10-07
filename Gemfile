@@ -53,5 +53,3 @@ end
 gem 'rest-client'
 gem 'json'
 gem 'loofah'
-
-gem 'whenever', require: false
