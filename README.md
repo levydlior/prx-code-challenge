@@ -10,7 +10,6 @@
 
 ### To run this project: 
 <ol>
-  <li>You need to have postgresql installed on your device</li>
   <li>Clone the repo to your computer</li>
   <li>(assuming you have postgresql) In the terminal run `$sudo service postgresql start` (you'll need to enter your user's password)</li>
   <li>In the root directory run bundle install</li>
